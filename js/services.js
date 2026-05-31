@@ -165,7 +165,8 @@ export const SalesService = {
     return db.pedidos.map((pedido) => {
       const cliente = byId(db.clientes, "idCliente", pedido.idCliente);
       const usuario = PeopleService.getUsuario(pedido.idUsuario);
-      const boleta = byId(db.boletas, "idPedido", pedido.idPedido);
+      const ticket = byId(db.boletas, "idPedido", pedido.idPedido);
+      const boleta = ticket ? { ...ticket, metodo: byId(db.metodosPago, "idMetodoPago", ticket.idMetodoPago) } : null;
       return { ...pedido, cliente, usuario, boleta, detalles: this.getDetallePedido(pedido.idPedido) };
     });
   },

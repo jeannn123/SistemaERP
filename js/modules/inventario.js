@@ -4,7 +4,6 @@ import { format, InventoryService, PeopleService } from "../services.js";
 export function init(root) {
   renderOptionsLists(root);
   renderSupplies(root);
-  renderMeasures(root);
   renderPurchases(root);
   renderMovements(root);
   renderKardex(root);
@@ -37,17 +36,6 @@ function renderSupplies(root) {
       cell(actionButtons())
     );
   }));
-}
-
-function renderMeasures(root) {
-  const target = root.querySelector("#measuresTable");
-  if (!target) return;
-  appendRows(target, InventoryService.getMedidas().map((item) => row(
-    cell(item.idMedida),
-    cell(item.descripcion),
-    cell(item.sigla),
-    cell(actionButtons())
-  )));
 }
 
 function renderPurchases(root) {

@@ -4,7 +4,6 @@ import { CatalogService, format, InventoryService } from "../services.js";
 export function init(root) {
   renderCategoryOptions(root);
   renderProducts(root);
-  renderCategories(root);
   renderRecipes(root);
   renderPromotions(root);
   renderCombos(root);
@@ -31,15 +30,6 @@ function renderProducts(root) {
       cell(badge(status, format.badge(status))),
       cell(actionButtons())
     );
-  }));
-}
-
-function renderCategories(root) {
-  const target = root.querySelector("#categoriesTable");
-  if (!target) return;
-  appendRows(target, CatalogService.getCategorias().map((item) => {
-    const total = CatalogService.getProductos().filter((product) => product.idCategoria === item.idCategoria).length;
-    return row(cell(item.idCategoria), cell(item.nombre), cell(total), cell(actionButtons()));
   }));
 }
 

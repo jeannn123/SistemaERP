@@ -93,6 +93,29 @@
   gap: 12px;
 }
 
+.area-switcher {
+  display: grid;
+  gap: 4px;
+  min-width: 190px;
+}
+
+.area-switcher span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-align: left;
+}
+
+.area-switcher select {
+  min-height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--white);
+  color: var(--text);
+  font-weight: 800;
+  padding: 8px 10px;
+}
+
 .user-box strong,
 .user-box span {
   display: block;
@@ -102,6 +125,10 @@
 .user-box span {
   color: var(--muted);
   font-size: 12px;
+}
+
+.user-box .area-switcher span {
+  text-align: left;
 }
 
 .content-area {

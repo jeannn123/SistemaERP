@@ -5,7 +5,6 @@ export function init(root) {
   renderSelectors(root);
   renderEmployees(root);
   renderUsers(root);
-  renderRoles(root);
   renderSuppliers(root);
 }
 
@@ -43,22 +42,6 @@ function renderUsers(root) {
       cell(actionButtons())
     );
   }));
-}
-
-function renderRoles(root) {
-  const target = root.querySelector("#rolesTable");
-  if (!target) return;
-  const visible = {
-    Administrador: "Acceso total",
-    Cajero: "POS, registrar pedidos, generar boletas",
-    Cocina: "Ver pedidos y cambiar estado"
-  };
-  appendRows(target, PeopleService.getRoles().map((item) => row(
-    cell(item.idRol),
-    cell(item.nombre),
-    cell(visible[item.nombre] || "Personalizable"),
-    cell(actionButtons())
-  )));
 }
 
 function renderSuppliers(root) {

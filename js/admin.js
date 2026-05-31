@@ -4,7 +4,8 @@ setupUserBox("Administrador");
 
 const content = document.querySelector("#content");
 const title = document.querySelector("#viewTitle");
-const navItems = document.querySelectorAll(".nav-item");
+const navItems = Array.from(document.querySelectorAll(".nav-item"));
+const areaSelect = document.querySelector("#moduleAreaSelect");
 
 const moduleLoaders = {
   dashboard: () => import("./modules/dashboard.js"),
@@ -18,27 +19,43 @@ const moduleLoaders = {
 const titles = {
   dashboard: "Dashboard",
   pedidos: "Pedidos",
-  clientes: "Clientes",
-  boletas: "Boletas",
-  "metodos-pago": "Metodos de pago",
   productos: "Productos",
-  categorias: "Categorias",
-  recetas: "Recetas",
   promociones: "Promociones",
-  combos: "Combos",
   insumos: "Insumos",
-  medidas: "Unidades de medida",
   compras: "Compras",
   movimientos: "Movimientos",
   kardex: "Kardex",
   empleados: "Empleados",
   usuarios: "Usuarios",
-  roles: "Roles",
   proveedores: "Proveedores",
-  ventas: "Reportes de ventas",
-  inventario: "Movimientos de inventario",
-  anulados: "Pedidos anulados"
+  "reportes:ventas": "Reportes de ventas",
+  "reportes:compras": "Reportes de compras",
+  "reportes:productos": "Productos mas vendidos",
+  "reportes:inventario": "Movimientos de inventario",
+  "reportes:anulados": "Pedidos anulados"
 };
+
+function isVisibleForArea(button, area) {
+  return button.dataset.area === "general" || button.dataset.area === area;
+}
+
+function setActiveNav(button) {
+  navItems.forEach((item) => item.classList.remove("active"));
+  button.classList.add("active");
+}
+
+function applyArea(area, { loadFirst = true } = {}) {
+  navItems.forEach((button) => {
+    button.hidden = !isVisibleForArea(button, area);
+  });
+
+  if (!loadFirst) return;
+
+  const firstAreaItem = navItems.find((button) => button.dataset.area === area);
+  if (!firstAreaItem) return;
+  setActiveNav(firstAreaItem);
+  loadPage(firstAreaItem.dataset.page, firstAreaItem.dataset.section);
+}
 
 async function loadPage(page, section) {
   const response = await fetch(`pages/${page}.html`);
@@ -50,16 +67,20 @@ async function loadPage(page, section) {
 
   const module = await moduleLoaders[page]();
   module.init(content, section);
-  title.textContent = titles[section] || titles[page] || "ERP";
+  title.textContent = titles[`${page}:${section}`] || titles[section] || titles[page] || "ERP";
   content.focus();
 }
 
 navItems.forEach((button) => {
   button.addEventListener("click", () => {
-    navItems.forEach((item) => item.classList.remove("active"));
-    button.classList.add("active");
+    setActiveNav(button);
     loadPage(button.dataset.page, button.dataset.section);
   });
 });
 
+areaSelect.addEventListener("change", () => {
+  applyArea(areaSelect.value);
+});
+
+applyArea(areaSelect.value, { loadFirst: false });
 loadPage("dashboard", "dashboard");

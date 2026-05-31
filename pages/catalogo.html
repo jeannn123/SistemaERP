@@ -22,33 +22,22 @@
       <tbody id="productsTable"></tbody>
     </table>
   </div>
-</section>
-
-<section id="categorias" class="admin-section">
-  <div class="toolbar">
-    <div>
-      <h2>Categorias</h2>
-      <p class="muted">Agrupacion visual para POS y catalogo.</p>
-    </div>
-    <button class="btn btn-secondary" type="button">Nueva categoria</button>
-  </div>
-  <div class="card table-card">
-    <table>
-      <thead><tr><th>ID</th><th>Nombre</th><th>Productos</th><th>Acciones</th></tr></thead>
-      <tbody id="categoriesTable"></tbody>
-    </table>
-  </div>
-</section>
-
-<section id="recetas" class="admin-section">
-  <div class="toolbar">
+  <div class="toolbar secondary-toolbar">
     <div>
       <h2>Recetas / Composicion</h2>
-      <p class="muted">Relacion PRODUCTO_INSUMO. Tambien aplica a bebidas terminadas con cantidad 1 UND.</p>
+      <p class="muted">Relacion PRODUCTO_INSUMO para productos preparados y bebidas terminadas.</p>
     </div>
     <button class="btn btn-secondary" type="button">Nueva composicion</button>
   </div>
   <div id="recipesList" class="two-columns"></div>
+  <div class="toolbar secondary-toolbar">
+    <div>
+      <h2>Combos</h2>
+      <p class="muted">Productos compuestos por otros productos con precio propio.</p>
+    </div>
+    <button class="btn btn-secondary" type="button">Nuevo combo</button>
+  </div>
+  <div id="combosList" class="two-columns"></div>
 </section>
 
 <section id="promociones" class="admin-section">
@@ -65,15 +54,4 @@
       <tbody id="promotionsTable"></tbody>
     </table>
   </div>
-</section>
-
-<section id="combos" class="admin-section">
-  <div class="toolbar">
-    <div>
-      <h2>Combos</h2>
-      <p class="muted">Combos como productos con precio propio y composicion de productos incluidos.</p>
-    </div>
-    <button class="btn btn-secondary" type="button">Nuevo combo</button>
-  </div>
-  <div id="combosList" class="two-columns"></div>
 </section>

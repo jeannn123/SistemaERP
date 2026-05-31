@@ -22,30 +22,22 @@
       </div>
 
       <nav class="sidebar-nav" aria-label="Modulos del ERP">
-        <button class="nav-item active" data-page="dashboard" data-section="dashboard">Dashboard</button>
-        <button class="nav-item" data-page="ventas" data-section="pedidos">Pedidos</button>
-        <button class="nav-item" data-page="ventas" data-section="clientes">Clientes</button>
-        <button class="nav-item" data-page="ventas" data-section="boletas">Boletas</button>
-        <button class="nav-item" data-page="ventas" data-section="metodos-pago">Metodos de pago</button>
-        <button class="nav-item" data-page="catalogo" data-section="productos">Productos</button>
-        <button class="nav-item" data-page="catalogo" data-section="categorias">Categorias</button>
-        <button class="nav-item" data-page="catalogo" data-section="recetas">Recetas</button>
-        <button class="nav-item" data-page="catalogo" data-section="promociones">Promociones</button>
-        <button class="nav-item" data-page="catalogo" data-section="combos">Combos</button>
-        <button class="nav-item" data-page="inventario" data-section="insumos">Insumos</button>
-        <button class="nav-item" data-page="inventario" data-section="medidas">Unidades de medida</button>
-        <button class="nav-item" data-page="inventario" data-section="compras">Compras</button>
-        <button class="nav-item" data-page="inventario" data-section="movimientos">Movimientos</button>
-        <button class="nav-item" data-page="inventario" data-section="kardex">Kardex</button>
-        <button class="nav-item" data-page="personas" data-section="empleados">Empleados</button>
-        <button class="nav-item" data-page="personas" data-section="usuarios">Usuarios</button>
-        <button class="nav-item" data-page="personas" data-section="roles">Roles</button>
-        <button class="nav-item" data-page="personas" data-section="proveedores">Proveedores</button>
-        <button class="nav-item" data-page="reportes" data-section="ventas">Reportes de ventas</button>
-        <button class="nav-item" data-page="reportes" data-section="compras">Reportes de compras</button>
-        <button class="nav-item" data-page="reportes" data-section="productos">Productos mas vendidos</button>
-        <button class="nav-item" data-page="reportes" data-section="inventario">Movimientos de inventario</button>
-        <button class="nav-item" data-page="reportes" data-section="anulados">Pedidos anulados</button>
+        <button class="nav-item active" data-area="general" data-page="dashboard" data-section="dashboard">Dashboard</button>
+        <button class="nav-item" data-area="ventas" data-page="ventas" data-section="pedidos">Pedidos</button>
+        <button class="nav-item" data-area="ventas" data-page="catalogo" data-section="productos">Productos</button>
+        <button class="nav-item" data-area="ventas" data-page="catalogo" data-section="promociones">Promociones</button>
+        <button class="nav-item" data-area="inventario" data-page="inventario" data-section="insumos">Insumos</button>
+        <button class="nav-item" data-area="inventario" data-page="inventario" data-section="compras">Compras</button>
+        <button class="nav-item" data-area="inventario" data-page="inventario" data-section="movimientos">Movimientos</button>
+        <button class="nav-item" data-area="inventario" data-page="inventario" data-section="kardex">Kardex</button>
+        <button class="nav-item" data-area="administracion" data-page="personas" data-section="empleados">Empleados</button>
+        <button class="nav-item" data-area="administracion" data-page="personas" data-section="usuarios">Usuarios</button>
+        <button class="nav-item" data-area="administracion" data-page="personas" data-section="proveedores">Proveedores</button>
+        <button class="nav-item" data-area="reportes" data-page="reportes" data-section="ventas">Reportes de ventas</button>
+        <button class="nav-item" data-area="reportes" data-page="reportes" data-section="compras">Reportes de compras</button>
+        <button class="nav-item" data-area="reportes" data-page="reportes" data-section="productos">Productos mas vendidos</button>
+        <button class="nav-item" data-area="reportes" data-page="reportes" data-section="inventario">Movimientos de inventario</button>
+        <button class="nav-item" data-area="reportes" data-page="reportes" data-section="anulados">Pedidos anulados</button>
       </nav>
     </aside>
 
@@ -56,6 +48,15 @@
           <h1 id="viewTitle">Dashboard</h1>
         </div>
         <div class="user-box">
+          <label class="area-switcher">
+            <span>Area</span>
+            <select id="moduleAreaSelect">
+              <option value="ventas">Ventas</option>
+              <option value="inventario">Inventario</option>
+              <option value="reportes">Reportes</option>
+              <option value="administracion">Administracion</option>
+            </select>
+          </label>
           <div>
             <strong id="activeUser">Administrador</strong>
             <span id="activeRole">Administrador</span>

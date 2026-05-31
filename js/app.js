@@ -54,9 +54,10 @@ export function textButton(text, className = "btn btn-ghost", dataset = {}) {
   return el("button", { className, text, type: "button", dataset });
 }
 
-export function actionButtons({ includeAnular = false, includeDetalle = false } = {}) {
+export function actionButtons({ includeAnular = false, includeDetalle = false, includeBoleta = false } = {}) {
   const wrap = el("div", { className: "action-row" });
   if (includeDetalle) wrap.append(textButton("Ver detalle", "btn btn-secondary js-detail"));
+  if (includeBoleta) wrap.append(textButton("Ver boleta", "btn btn-secondary js-ticket"));
   wrap.append(textButton("Editar"), textButton("Desactivar", "btn btn-secondary"));
   if (includeAnular) wrap.append(textButton("Anular", "btn btn-danger"));
   return wrap;
