@@ -1,27 +1,19 @@
 import { setupUserBox } from "./app.js";
 
-setupUserBox("Administrador");
-
-const resolvePageUrl = (page) => new URL(`../pages/${page}.html`, import.meta.url);
+// Muestra el usuario guardado en la sesion dentro del panel administrador.
+setupUserBox();
 
 const content = document.querySelector("#content");
 const title = document.querySelector("#viewTitle");
 const navItems = Array.from(document.querySelectorAll(".nav-item"));
 const areaSelect = document.querySelector("#moduleAreaSelect");
 
-const moduleLoaders = {
-  dashboard: () => import("./modules/dashboard.js"),
-  ventas: () => import("./modules/ventas.js"),
-  catalogo: () => import("./modules/catalogo.js"),
-  inventario: () => import("./modules/inventario.js"),
-  personas: () => import("./modules/personas.js"),
-  reportes: () => import("./modules/reportes.js")
-};
-
 const titles = {
   dashboard: "Dashboard",
   pedidos: "Pedidos",
   productos: "Productos",
+  recetas: "Recetas",
+  combos: "Combos",
   promociones: "Promociones",
   insumos: "Insumos",
   compras: "Compras",
@@ -37,15 +29,18 @@ const titles = {
   "reportes:anulados": "Pedidos anulados"
 };
 
+// Indica si una opcion del menu pertenece al area seleccionada.
 function isVisibleForArea(button, area) {
   return button.dataset.area === "general" || button.dataset.area === area;
 }
 
+// Marca visualmente una sola opcion del menu como activa.
 function setActiveNav(button) {
   navItems.forEach((item) => item.classList.remove("active"));
   button.classList.add("active");
 }
 
+// Filtra el menu por area y, si corresponde, carga su primera pantalla.
 function applyArea(area, { loadFirst = true } = {}) {
   navItems.forEach((button) => {
     button.hidden = !isVisibleForArea(button, area);
@@ -59,8 +54,10 @@ function applyArea(area, { loadFirst = true } = {}) {
   loadPage(firstAreaItem.dataset.page, firstAreaItem.dataset.section);
 }
 
+// Carga el HTML seleccionado. Solo empleados tiene conexion activa al backend.
 async function loadPage(page, section) {
-  const response = await fetch(resolvePageUrl(page));
+  const pageUrl = new URL("../pages/" + page + ".html", import.meta.url);
+  const response = await fetch(pageUrl);
   if (!response.ok) {
     content.innerHTML = `<section class="admin-section active"><div class="card panel">No se pudo cargar la pagina ${page}.html</div></section>`;
     title.textContent = "Error de carga";
@@ -72,12 +69,16 @@ async function loadPage(page, section) {
     node.classList.toggle("active", node.id === section);
   });
 
-  const module = await moduleLoaders[page]();
-  module.init(content, section);
+  if (page === "personas" && section === "empleados") {
+    const employeeModule = await import("./modules/personas.js");
+    await employeeModule.init(content, section);
+  }
+
   title.textContent = titles[`${page}:${section}`] || titles[section] || titles[page] || "ERP";
   content.focus();
 }
 
+// Cada opcion del menu carga su pagina y seccion correspondientes.
 navItems.forEach((button) => {
   button.addEventListener("click", () => {
     setActiveNav(button);
@@ -85,9 +86,11 @@ navItems.forEach((button) => {
   });
 });
 
+// Cambiar el area actualiza las opciones visibles del menu.
 areaSelect.addEventListener("change", () => {
   applyArea(areaSelect.value);
 });
 
+// Inicia el panel mostrando el HTML del dashboard sin datos dinamicos.
 applyArea(areaSelect.value, { loadFirst: false });
 loadPage("dashboard", "dashboard");

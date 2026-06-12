@@ -4,11 +4,18 @@
       <h2>Empleados</h2>
       <p class="muted">Datos del personal interno.</p>
     </div>
-    <button class="btn btn-secondary" type="button">Nuevo empleado</button>
+    <button class="btn btn-secondary" type="submit" form="employeeForm">Crear</button>
   </div>
+  <form id="employeeForm" class="card form-panel compact-form">
+    <label>Nombre <input name="nombre" maxlength="20" placeholder="Juan" required></label>
+    <label>Apellido <input name="apellido" maxlength="20" placeholder="Perez" required></label>
+    <label>DNI <input name="dni" maxlength="15" placeholder="12345678" required></label>
+    <label>Telefono <input name="telefono" maxlength="15" placeholder="999888777" required></label>
+    <label>Cargo <input name="cargo" maxlength="15" placeholder="Cajero" required></label>
+  </form>
   <div class="card table-card">
     <table>
-      <thead><tr><th>ID</th><th>Nombre</th><th>DNI</th><th>Telefono</th><th>Cargo</th><th>Acciones</th></tr></thead>
+      <thead><tr><th>ID</th><th>Nombre</th><th>Apellido</th><th>DNI</th><th>Telefono</th><th>Cargo</th></tr></thead>
       <tbody id="employeesTable"></tbody>
     </table>
   </div>
@@ -20,17 +27,20 @@
       <h2>Usuarios</h2>
       <p class="muted">Cuentas de acceso. No se eliminan, se desactivan.</p>
     </div>
-    <button class="btn btn-secondary" type="button">Nuevo usuario</button>
+    <button class="btn btn-secondary" type="submit" form="userForm">Crear</button>
   </div>
-  <form class="card form-panel compact-form">
-    <label>Username <input placeholder="cajero01"></label>
-    <label>Password <input type="password" placeholder="Temporal"></label>
-    <label>Rol <select id="roleOptions"></select></label>
-    <label>Empleado <select id="employeeOptions"></select></label>
+  <form id="userForm" class="card form-panel compact-form">
+    <label>Username <input name="username" maxlength="255" placeholder="cajero01" required></label>
+    <label>Password <input name="password" type="password" placeholder="Temporal" required></label>
+    <label>Rol <select id="roleOptions" name="idRol" required></select></label>
+    <label>Empleado <select id="employeeOptions" name="idEmpleado" required></select></label>
+    <label>Estado
+      <select name="estado"><option value="true">Activo</option><option value="false">Inactivo</option></select>
+    </label>
   </form>
   <div class="card table-card">
     <table>
-      <thead><tr><th>ID</th><th>Usuario</th><th>Empleado</th><th>Rol</th><th>Estado</th><th>Acciones</th></tr></thead>
+      <thead><tr><th>ID</th><th>Usuario</th><th>Empleado</th><th>Rol</th><th>Estado</th></tr></thead>
       <tbody id="usersTable"></tbody>
     </table>
   </div>
@@ -42,8 +52,14 @@
       <h2>Proveedores</h2>
       <p class="muted">Empresas que abastecen insumos.</p>
     </div>
-    <button class="btn btn-secondary" type="button">Nuevo proveedor</button>
+    <button class="btn btn-secondary" type="submit" form="supplierForm">Crear</button>
   </div>
+  <form id="supplierForm" class="card form-panel compact-form">
+    <label>RUC <input name="ruc" minlength="11" maxlength="11" placeholder="20123456789" required></label>
+    <label>Nombre <input name="nombre" maxlength="25" placeholder="Distribuidora Andina" required></label>
+    <label>Telefono <input name="telefono" maxlength="15" placeholder="955111333" required></label>
+    <label>Direccion <input name="direccion" maxlength="25" placeholder="Av. Central 456" required></label>
+  </form>
   <div class="card table-card">
     <table>
       <thead><tr><th>RUC</th><th>Nombre</th><th>Telefono</th><th>Direccion</th><th>Acciones</th></tr></thead>

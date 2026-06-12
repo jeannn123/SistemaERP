@@ -1,57 +1,40 @@
-import { actionButtons, appendRows, badge, cell, fillSelect, row } from "../app.js";
-import { format, PeopleService } from "../services.js";
+import { showEmployees } from "../app.js";
+import { get, post } from "../services.js";
 
-export function init(root) {
-  renderSelectors(root);
-  renderEmployees(root);
-  renderUsers(root);
-  renderSuppliers(root);
+// Inicia solamente la seccion de empleados.
+export async function init(root, section) {
+  if (section !== "empleados") {
+    return;
+  }
+
+  const form = root.querySelector("#employeeForm");
+  const table = root.querySelector("#employeesTable");
+
+  await loadEmployees(table);
+
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    await saveEmployee(form);
+    form.reset();
+    await loadEmployees(table);
+  });
 }
 
-function renderSelectors(root) {
-  const roles = root.querySelector("#roleOptions");
-  const employees = root.querySelector("#employeeOptions");
-  if (roles) fillSelect(roles, PeopleService.getRoles(), (item) => item.idRol, (item) => item.nombre);
-  if (employees) fillSelect(employees, PeopleService.getEmpleados(), (item) => item.idEmpleado, (item) => `${item.nombre} ${item.apellido}`);
+// GET /api/empleados: obtiene los empleados de Spring Boot.
+async function loadEmployees(table) {
+  const employees = await get("/empleados");
+  showEmployees(table, employees);
 }
 
-function renderEmployees(root) {
-  const target = root.querySelector("#employeesTable");
-  if (!target) return;
-  appendRows(target, PeopleService.getEmpleados().map((item) => row(
-    cell(item.idEmpleado),
-    cell(`${item.nombre} ${item.apellido}`),
-    cell(item.dni),
-    cell(item.telefono),
-    cell(item.cargo),
-    cell(actionButtons())
-  )));
-}
+// POST /api/empleados: envia los datos escritos en el formulario.
+async function saveEmployee(form) {
+  const employee = {
+    nombre: form.elements.nombre.value.trim(),
+    apellido: form.elements.apellido.value.trim(),
+    dni: form.elements.dni.value.trim(),
+    telefono: form.elements.telefono.value.trim(),
+    cargo: form.elements.cargo.value.trim()
+  };
 
-function renderUsers(root) {
-  const target = root.querySelector("#usersTable");
-  if (!target) return;
-  appendRows(target, PeopleService.getUsuarios().map((item) => {
-    const status = item.estado ? "Activo" : "Inactivo";
-    return row(
-      cell(item.idUsuario),
-      cell(item.username),
-      cell(`${item.empleado.nombre} ${item.empleado.apellido}`),
-      cell(item.rol.nombre),
-      cell(badge(status, format.badge(status))),
-      cell(actionButtons())
-    );
-  }));
-}
-
-function renderSuppliers(root) {
-  const target = root.querySelector("#suppliersTable");
-  if (!target) return;
-  appendRows(target, PeopleService.getProveedores().map((item) => row(
-    cell(item.ruc),
-    cell(item.nombre),
-    cell(item.telefono),
-    cell(item.direccion),
-    cell(actionButtons())
-  )));
+  await post("/empleados", employee);
 }

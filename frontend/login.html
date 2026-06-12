@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mini ERP Pizzeria | Login</title>
   <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/login.css">
@@ -12,29 +13,67 @@
 <body class="login-body">
   <main class="login-shell">
     <section class="login-panel">
-      <div class="brand-mark">MP</div>
-      <p class="eyebrow">Acceso interno</p>
-      <h1>Mini ERP Pizzeria</h1>
-      <p class="login-copy">Sistema operativo para ventas, cocina, inventario y administracion.</p>
+      <div class="login-showcase">
+        <div class="login-showcase-top">
+          <p class="login-product">ERP logistic</p>
+          <div class="login-seal">
+            <img src="assets/img/logo.png" alt="Logo de Mamma Tomato Pizza & Focaccia">
+          </div>
+        </div>
 
-      <form id="loginForm" class="login-form">
-        <label>
-          Usuario
-          <input id="username" name="username" type="text" autocomplete="username" placeholder="admin" required>
-        </label>
-        <label>
-          Contrasena
-          <input id="password" name="password" type="password" autocomplete="current-password" placeholder="admin123" required>
-        </label>
-        <p id="loginError" class="form-error hidden">Usuario o contrasena incorrectos.</p>
-        <button class="btn btn-primary btn-full" type="submit">Iniciar sesion</button>
-      </form>
+        <div class="login-showcase-copy">
+          <h1>Gestion de ventas e inventario</h1>
+          <p class="login-copy">Sistema personalizado para operaciones comerciales y control de stock</p>
+          <p class="login-client">Implementado para Mamma Tomato Pizza &amp; Focaccia</p>
+        </div>
 
-      <div class="demo-users">
-        <span>Usuarios demo:</span>
-        <strong>admin/admin123</strong>
-        <strong>cajero/cajero123</strong>
-        <strong>cocina/cocina123</strong>
+        <p class="login-credit">Desarrollado por SOFUTP</p>
+      </div>
+
+      <div class="login-access">
+        <div class="login-access-inner">
+          <header class="login-access-header">
+            <h2>Iniciar sesion</h2>
+          </header>
+
+          <form id="loginForm" class="login-form">
+            <label>
+              Usuario
+              <span class="input-shell">
+                <span class="input-icon" aria-hidden="true">
+                  <i class="fa-solid fa-user" role="presentation"></i>
+                </span>
+                <input id="username" name="username" type="text" autocomplete="username" placeholder="Ingrese su usuario" required>
+              </span>
+            </label>
+
+            <label>
+              Contrasena
+              <span class="input-shell">
+                <span class="input-icon" aria-hidden="true">
+                  <i class="fa-solid fa-lock" role="presentation"></i>
+                </span>
+                <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Ingrese su contrasena" required>
+              </span>
+            </label>
+
+            <p id="loginError" class="form-error hidden">Usuario o contrasena incorrectos.</p>
+
+            <button class="btn btn-primary btn-full btn-large" type="submit">
+              <span class="button-icon" aria-hidden="true">
+                <i class="fa-solid fa-right-to-bracket" role="presentation"></i>
+              </span>
+              <span>Iniciar sesion</span>
+            </button>
+          </form>
+
+          <p class="login-note">
+            <span class="note-icon" aria-hidden="true">
+              <i class="fa-solid fa-shield-halved" role="presentation"></i>
+            </span>
+            Solo personal autorizado
+          </p>
+        </div>
       </div>
     </section>
   </main>

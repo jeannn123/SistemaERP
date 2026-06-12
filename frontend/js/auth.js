@@ -1,26 +1,29 @@
-import { AuthService } from "./services.js";
+import { login, saveSession } from "./services.js";
 
 const form = document.querySelector("#loginForm");
 const error = document.querySelector("#loginError");
-const resolveRoute = (file) => new URL(`../pages/${file}`, import.meta.url).href;
 
-const routes = {
-  Administrador: resolveRoute("admin.html"),
-  Cajero: resolveRoute("cajero.html"),
-  Cocina: resolveRoute("cocina.html")
-};
-
-form.addEventListener("submit", (event) => {
+// Envia las credenciales y abre el panel correspondiente al rol.
+form.addEventListener("submit", async function (event) {
   event.preventDefault();
   const username = form.username.value.trim();
-  const password = form.password.value.trim();
-  const user = AuthService.login(username, password);
+  const password = form.password.value;
+  error.classList.add("hidden");
 
-  if (!user) {
+  try {
+    const user = await login(username, password);
+    saveSession(user);
+
+    if (user.rol === "ADMIN") {
+      window.location.href = new URL("../pages/admin.html", import.meta.url).href;
+    } else if (user.rol === "CAJERO") {
+      window.location.href = new URL("../pages/cajero.html", import.meta.url).href;
+    } else if (user.rol === "COCINA") {
+      window.location.href = new URL("../pages/cocina.html", import.meta.url).href;
+    } else {
+      throw new Error("Rol no reconocido");
+    }
+  } catch {
     error.classList.remove("hidden");
-    return;
   }
-
-  AuthService.setSession(user);
-  window.location.href = routes[user.rol] || new URL("../login.html", import.meta.url).href;
 });

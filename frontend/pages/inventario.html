@@ -4,19 +4,18 @@
       <h2>Insumos</h2>
       <p class="muted">Fuente real del inventario y base del Kardex.</p>
     </div>
-    <button class="btn btn-secondary" type="button">Nuevo insumo</button>
+    <button class="btn btn-secondary" type="submit" form="supplyForm">Crear</button>
   </div>
-  <form class="card form-panel compact-form">
-    <label>Codigo <input placeholder="INS001"></label>
-    <label>Nombre <input placeholder="Queso mozzarella"></label>
-    <label>Precio compra <input type="number" step="0.01"></label>
-    <label>Stock <input type="number" step="0.001"></label>
-    <label>Stock minimo <input type="number" step="0.001"></label>
-    <label>Unidad <select id="measureOptions"></select></label>
+  <form id="supplyForm" class="card form-panel compact-form">
+    <label>Codigo <input name="codigo" minlength="9" maxlength="9" placeholder="IN0000001" required></label>
+    <label>Nombre <input name="nombre" maxlength="25" placeholder="Queso mozzarella" required></label>
+    <label>Stock <input name="stock" type="number" min="0" step="0.001" required></label>
+    <label>Stock minimo <input name="minimoStock" type="number" min="0" step="0.001" required></label>
+    <label>Unidad <select id="measureOptions" name="idMedida" required></select></label>
   </form>
   <div class="card table-card">
     <table>
-      <thead><tr><th>Codigo</th><th>Nombre</th><th>Unidad</th><th>Precio</th><th>Stock</th><th>Minimo</th><th>Estado</th><th>Acciones</th></tr></thead>
+      <thead><tr><th>Codigo</th><th>Nombre</th><th>Unidad</th><th>Stock</th><th>Minimo</th><th>Estado</th><th>Acciones</th></tr></thead>
       <tbody id="suppliesTable"></tbody>
     </table>
   </div>
@@ -28,12 +27,15 @@
       <h2>Compras</h2>
       <p class="muted">Registrar compra genera entrada de inventario automaticamente.</p>
     </div>
-    <button class="btn btn-secondary" type="button">Nueva compra</button>
+    <button class="btn btn-secondary" type="submit" form="purchaseForm">Crear</button>
   </div>
-  <form class="card form-panel compact-form">
-    <label>Proveedor <select id="supplierOptions"></select></label>
-    <label>Fecha <input type="date"></label>
-    <label>Estado <select><option>Registrada</option><option>Anulada</option></select></label>
+  <form id="purchaseForm" class="card form-panel compact-form">
+    <label>Proveedor <select id="supplierOptions" name="idProveedor" required></select></label>
+    <label>Fecha <input name="fecha" type="date" required></label>
+    <label>Estado <input name="estado" maxlength="20" value="RECIBIDA" required></label>
+    <label>Insumo <select id="purchaseSupplyOptions" required></select></label>
+    <label>Cantidad <input id="purchaseQuantity" type="number" min="0.001" step="0.001" required></label>
+    <label>Precio unitario <input id="purchaseUnitPrice" type="number" min="0" max="9999.99" step="0.01" required></label>
   </form>
   <div class="card table-card">
     <table>
@@ -49,8 +51,16 @@
       <h2>Movimientos</h2>
       <p class="muted">Salidas manuales por merma o ajuste. Compras y ventas generan movimientos automaticos.</p>
     </div>
-    <button class="btn btn-secondary" type="button">Nuevo movimiento</button>
+    <button class="btn btn-secondary" type="submit" form="movementForm">Crear</button>
   </div>
+  <form id="movementForm" class="card form-panel compact-form">
+    <label>Fecha <input name="fecha" type="date" required></label>
+    <label>Tipo <select id="movementTypeOptions" name="idTipoMovimiento" required></select></label>
+    <label>Documento <input name="documento" maxlength="15" placeholder="M-0001" required></label>
+    <label>Glosa <input name="glosa" maxlength="25" placeholder="Salida manual" required></label>
+    <label>Insumo <select id="movementSupplyOptions" required></select></label>
+    <label>Cantidad <input id="movementQuantity" type="number" min="0.001" step="0.001" required></label>
+  </form>
   <div class="card table-card">
     <table>
       <thead><tr><th>ID</th><th>Fecha</th><th>Tipo</th><th>Operacion</th><th>Documento</th><th>Glosa</th><th>Usuario</th></tr></thead>
@@ -73,7 +83,7 @@
   </div>
   <div class="card table-card">
     <table>
-      <thead><tr><th>Fecha</th><th>Insumo</th><th>Documento</th><th>Tipo</th><th>Entrada</th><th>Salida</th><th>Stock resultante</th></tr></thead>
+      <thead><tr><th>Fecha</th><th>Insumo</th><th>Documento</th><th>Tipo</th><th>Entrada</th><th>Salida</th></tr></thead>
       <tbody id="kardexTable"></tbody>
     </table>
   </div>
