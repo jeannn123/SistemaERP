@@ -18,7 +18,7 @@
       <label class="field">Codigo
         <input type="text" th:field="*{codigo}" maxlength="6" readonly
                class="readonly-field" placeholder="Se asigna automaticamente">
-        <small class="muted">Generado automaticamente por el sistema (no editable).</small>
+        <small class="muted">Generado automaticamente.</small>
       </label>
 
       <label class="field">Nombre
@@ -55,18 +55,19 @@
         </select>
         <span class="invalid-feedback" th:if="${#fields.hasErrors('idCategoria')}" th:errors="*{idCategoria}"></span>
       </label>
-
       <div class="field field-wide">
-        <span>Disponibilidad</span>
-        <div class="switch-row">
-          <label class="estado-switch">
-            <input type="checkbox" th:field="*{disponible}">
-            <span class="estado-slider"></span>
-          </label>
-          <span class="switch-text">Disponible para venta</span>
-        </div>
+      <span>Disponibilidad</span>
+      <div class="switch-row">
+        <label class="estado-switch">
+          <input type="checkbox" th:field="*{disponible}">
+          <span class="estado-slider"></span>
+        </label>
+        <span class="switch-text">Disponible para venta</span>
       </div>
     </div>
+    </div>
+
+
 
     <div class="form-actions">
       <a class="btn btn-ghost" th:href="@{/admin/productos}">Cancelar</a>

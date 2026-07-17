@@ -732,22 +732,22 @@ td.text-right {
   transition: left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15), background 0.3s ease, content 0.3s ease;
 }
 
-.estado-switch input:checked + .estado-slider {
+.estado-switch input:checked ~ .estado-slider {
   background: var(--brand-50);
   border-color: var(--brand-100);
 }
 
-.estado-switch input:checked + .estado-slider::before {
+.estado-switch input:checked ~ .estado-slider::before {
   content: "ON";
   left: 26px;
   background: var(--brand);
 }
 
-.estado-switch input:focus-visible + .estado-slider {
+.estado-switch input:focus-visible ~ .estado-slider {
   box-shadow: 0 0 0 3px rgba(46, 139, 79, 0.2);
 }
 
-.estado-switch input:disabled + .estado-slider {
+.estado-switch input:disabled ~ .estado-slider {
   opacity: 0.55;
   cursor: not-allowed;
 }

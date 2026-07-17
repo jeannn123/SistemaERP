@@ -74,7 +74,7 @@
               </div>
 
               <div class="compra-line-grid" th:each="item, stat : *{items}" data-compra-line>
-                <label class="field">Insumo
+                <label class="field">
                   <select class="compra-insumo"
                           th:field="*{items[__${stat.index}__].idInsumo}"
                           th:classappend="${#fields.hasErrors('items[' + stat.index + '].idInsumo')} ? 'is-invalid'">
@@ -87,7 +87,7 @@
                         th:if="${#fields.hasErrors('items[' + stat.index + '].idInsumo')}"
                         th:errors="*{items[__${stat.index}__].idInsumo}"></span>
                 </label>
-                <label class="field">Cantidad
+                <label class="field">
                   <input class="compra-cantidad" type="number" step="0.001" min="0.001"
                          th:field="*{items[__${stat.index}__].cantidad}"
                          th:classappend="${#fields.hasErrors('items[' + stat.index + '].cantidad')} ? 'is-invalid'"
@@ -96,7 +96,7 @@
                         th:if="${#fields.hasErrors('items[' + stat.index + '].cantidad')}"
                         th:errors="*{items[__${stat.index}__].cantidad}"></span>
                 </label>
-                <label class="field">Precio unitario
+                <label class="field">
                   <input class="compra-precio" type="number" step="0.01" min="0.01"
                          th:field="*{items[__${stat.index}__].precioUnitario}"
                          th:classappend="${#fields.hasErrors('items[' + stat.index + '].precioUnitario')} ? 'is-invalid'"
@@ -105,7 +105,7 @@
                         th:if="${#fields.hasErrors('items[' + stat.index + '].precioUnitario')}"
                         th:errors="*{items[__${stat.index}__].precioUnitario}"></span>
                 </label>
-                <label class="field">Subtotal
+                <label class="field">
                   <input class="compra-subtotal readonly-field" type="text" value="S/ 0.00" readonly tabindex="-1">
                 </label>
                 <button class="btn btn-ghost btn-sm" type="button" data-remove-compra-line aria-label="Quitar linea">
