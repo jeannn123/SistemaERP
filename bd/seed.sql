@@ -16,10 +16,10 @@ INSERT INTO `rol` (`id_rol`, `nombre`) VALUES
   (3, 'Cocina');
 
 -- Empleados
-INSERT INTO `empleado` (`id_empleado`, `nombre`, `apellido`, `dni`, `telefono`, `cargo`) VALUES
-  (1, 'Lucia', 'Ramos', '72814391', '987654321', 'Administrador'),
-  (2, 'Mario', 'Salas', '73451298', '976431258', 'Cajero'),
-  (3, 'Rosa',  'Vega',  '70234511', '965214783', 'Cocina');
+INSERT INTO `empleado` (`id_empleado`, `nombre`, `apellido_paterno`, `apellido_materno`, `dni`, `telefono`, `cargo`) VALUES
+  (1, 'Lucia', 'Ramos', '', '72814391', '987654321', 'Administrador'),
+  (2, 'Mario', 'Salas', '', '73451298', '976431258', 'Cajero'),
+  (3, 'Rosa',  'Vega',  '', '70234511', '965214783', 'Cocina');
 
 -- Usuarios (password con hash BCrypt)
 INSERT INTO `usuario` (`id_usuario`, `username`, `password`, `estado`, `es_admin_supremo`, `id_rol`, `id_empleado`) VALUES

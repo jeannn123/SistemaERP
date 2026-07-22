@@ -21,11 +21,13 @@
 
   <div class="card table-card" id="tablaEmpleados" data-table-tools>
     <table class="align-middle">
-      <thead><tr><th>N&deg;</th><th data-filter="input">Nombre</th><th data-filter="input">DNI</th><th>Telefono</th><th data-filter="select">Cargo</th><th></th></tr></thead>
+      <thead><tr><th>N&deg;</th><th data-filter="input">Nombre</th><th>Apellido Paterno</th><th>Apellido Materno</th> <th data-filter="input">DNI</th><th>Telefono</th><th data-filter="select">Cargo</th><th></th></tr></thead>
       <tbody>
         <tr th:each="e, eStat : ${empleados}">
           <td th:text="${eStat.count}">1</td>
-          <td th:text="${e.nombre} + ' ' + ${e.apellido}">Nombre</td>
+          <td th:text="${e.nombre}">Nombre</td>
+          <td th:text="${e.apellidoPaterno}">Apellido paterno</td>
+          <td th:text="${e.apellidoMaterno}">Apellido materno</td>
           <td th:text="${e.dni}">00000000</td>
           <td th:text="${e.telefono}">999999999</td>
           <td th:text="${e.cargo}">Cargo</td>
@@ -44,7 +46,7 @@
                 <li>
                   <button class="dropdown-item text-danger" type="button"
                           data-bs-toggle="modal" data-bs-target="#confirmarEliminar"
-                          th:attr="data-action=@{/admin/empleados/{id}/eliminar(id=${e.idEmpleado})},data-nombre=${e.nombre + ' ' + e.apellido}">
+                          th:attr="data-action=@{/admin/empleados/{id}/eliminar(id=${e.idEmpleado})},data-nombre=${e.nombre + ' ' + e.apellidoPaterno+' '+e.apellidoMaterno}">
                     <i class="bi bi-trash"></i> Eliminar
                   </button>
                 </li>
@@ -53,7 +55,7 @@
           </td>
         </tr>
         <tr th:if="${#lists.isEmpty(empleados)}" data-empty>
-          <td colspan="6"><div class="empty-state">No hay empleados registrados.</div></td>
+          <td colspan="8"><div class="empty-state">No hay empleados registrados.</div></td>
         </tr>
       </tbody>
     </table>

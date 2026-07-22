@@ -42,7 +42,9 @@ public class MovimientoComprobanteDTO {
 
     private static String nombreUsuario(Movimiento movimiento) {
         if (movimiento.getUsuario().getEmpleado() != null) {
-            return movimiento.getUsuario().getEmpleado().getNombre();
+            return movimiento.getUsuario().getEmpleado().getNombre() + " "
+                    + movimiento.getUsuario().getEmpleado().getApellidoPaterno() + " "
+                    + movimiento.getUsuario().getEmpleado().getApellidoMaterno();
         }
         return movimiento.getUsuario().getUsername();
     }

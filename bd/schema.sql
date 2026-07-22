@@ -58,7 +58,8 @@ CREATE TABLE `rol` (
 CREATE TABLE `empleado` (
   `id_empleado` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(20) NOT NULL,
-  `apellido` varchar(20) NOT NULL,
+  `apellido_paterno` varchar(20) NOT NULL,
+  `apellido_materno` varchar(20) NOT NULL,
   `dni` char(8) NOT NULL,
   `telefono` char(9) NOT NULL,
   `cargo` varchar(15) NOT NULL,

@@ -112,7 +112,7 @@ public class PedidoService {
 
     private String nombreCajero(Usuario u) {
         return u.getEmpleado() != null
-                ? u.getEmpleado().getNombre() + " " + u.getEmpleado().getApellido()
+                ? u.getEmpleado().getNombre() + " " + u.getEmpleado().getApellidoPaterno() + " " + u.getEmpleado().getApellidoMaterno()
                 : u.getUsername();
     }
 

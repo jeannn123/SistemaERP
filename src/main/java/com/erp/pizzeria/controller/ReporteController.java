@@ -121,7 +121,9 @@ public class ReporteController {
         for (Pedido p : pedidos) {
             Boleta b = boletas.get(p.getIdPedido());
             String cajero = p.getUsuario().getEmpleado() != null
-                    ? p.getUsuario().getEmpleado().getNombre()
+                    ? p.getUsuario().getEmpleado().getNombre() + " "
+                        + p.getUsuario().getEmpleado().getApellidoPaterno() + " "
+                        + p.getUsuario().getEmpleado().getApellidoMaterno()
                     : p.getUsuario().getUsername();
             filas.add(new AnuladoReporteDTO(
                     numero++,
