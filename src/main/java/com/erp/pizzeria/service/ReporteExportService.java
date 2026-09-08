@@ -52,13 +52,13 @@ public class ReporteExportService {
 
         Paragraph title = new Paragraph("Mamma Tomato - Reporte general", titleFont);
         doc.add(title);
-        Paragraph sub = new Paragraph("Generado el " + data.getGeneradoEn(), subFont);
+        Paragraph sub = new Paragraph("Generado el " + data.generadoEn(), subFont);
         sub.setSpacingAfter(14);
         doc.add(sub);
 
         addPdfSection(doc, "Estadisticas de ventas");
         PdfPTable t1 = pdfTable(new float[]{3, 2}, new String[]{"Indicador", "Valor"});
-        for (StatDTO s : data.getSalesStats()) {
+        for (StatDTO s : data.salesStats()) {
             pdfCell(t1, s.getLabel(), false);
             pdfCell(t1, s.getValue(), false);
         }
@@ -66,7 +66,7 @@ public class ReporteExportService {
 
         addPdfSection(doc, "Productos mas vendidos");
         PdfPTable t2 = pdfTable(new float[]{5, 2}, new String[]{"Producto", "Cantidad"});
-        for (TopProductoDTO p : data.getTopProductos()) {
+        for (TopProductoDTO p : data.topProductos()) {
             pdfCell(t2, p.getNombre(), false);
             pdfCell(t2, String.valueOf(p.getCantidad()), false);
         }
@@ -74,7 +74,7 @@ public class ReporteExportService {
 
         addPdfSection(doc, "Inventario por tipo");
         PdfPTable t3 = pdfTable(new float[]{4, 2, 2}, new String[]{"Tipo", "Operacion", "Registros"});
-        for (TipoMovReporteDTO m : data.getMovimientosPorTipo()) {
+        for (TipoMovReporteDTO m : data.movimientosPorTipo()) {
             pdfCell(t3, m.getTipo(), false);
             pdfCell(t3, m.getOperacion(), false);
             pdfCell(t3, String.valueOf(m.getRegistros()), false);
@@ -83,7 +83,7 @@ public class ReporteExportService {
 
         addPdfSection(doc, "Compras por proveedor");
         PdfPTable t4 = pdfTable(new float[]{4, 2, 2, 3}, new String[]{"Proveedor", "Compras", "Total", "Ultima compra"});
-        for (ProveedorReporteDTO c : data.getComprasPorProveedor()) {
+        for (ProveedorReporteDTO c : data.comprasPorProveedor()) {
             pdfCell(t4, c.getProveedor(), false);
             pdfCell(t4, String.valueOf(c.getCompras()), false);
             pdfCell(t4, money(c.getTotal()), false);
@@ -94,7 +94,7 @@ public class ReporteExportService {
         addPdfSection(doc, "Pedidos anulados");
         PdfPTable t5 = pdfTable(new float[]{1, 3, 3, 3, 2, 4},
                 new String[]{"N", "Fecha", "Cliente", "Cajero", "Total", "Motivo"});
-        for (AnuladoReporteDTO a : data.getAnulados()) {
+        for (AnuladoReporteDTO a : data.anulados()) {
             pdfCell(t5, String.valueOf(a.getNumero()), false);
             pdfCell(t5, a.getFecha(), false);
             pdfCell(t5, a.getCliente(), false);
@@ -152,7 +152,7 @@ public class ReporteExportService {
             Sheet s1 = wb.createSheet("Ventas");
             writeHeader(s1, header, "Indicador", "Valor");
             int r1 = 1;
-            for (StatDTO s : data.getSalesStats()) {
+            for (StatDTO s : data.salesStats()) {
                 Row row = s1.createRow(r1++);
                 row.createCell(0).setCellValue(s.getLabel());
                 row.createCell(1).setCellValue(s.getValue());
@@ -162,7 +162,7 @@ public class ReporteExportService {
             Sheet s2 = wb.createSheet("Top productos");
             writeHeader(s2, header, "Producto", "Cantidad");
             int r2 = 1;
-            for (TopProductoDTO p : data.getTopProductos()) {
+            for (TopProductoDTO p : data.topProductos()) {
                 Row row = s2.createRow(r2++);
                 row.createCell(0).setCellValue(p.getNombre());
                 row.createCell(1).setCellValue(p.getCantidad());
@@ -172,7 +172,7 @@ public class ReporteExportService {
             Sheet s3 = wb.createSheet("Inventario por tipo");
             writeHeader(s3, header, "Tipo", "Operacion", "Registros");
             int r3 = 1;
-            for (TipoMovReporteDTO m : data.getMovimientosPorTipo()) {
+            for (TipoMovReporteDTO m : data.movimientosPorTipo()) {
                 Row row = s3.createRow(r3++);
                 row.createCell(0).setCellValue(m.getTipo());
                 row.createCell(1).setCellValue(m.getOperacion());
@@ -183,7 +183,7 @@ public class ReporteExportService {
             Sheet s4 = wb.createSheet("Compras por proveedor");
             writeHeader(s4, header, "Proveedor", "Compras", "Total", "Ultima compra");
             int r4 = 1;
-            for (ProveedorReporteDTO c : data.getComprasPorProveedor()) {
+            for (ProveedorReporteDTO c : data.comprasPorProveedor()) {
                 Row row = s4.createRow(r4++);
                 row.createCell(0).setCellValue(c.getProveedor());
                 row.createCell(1).setCellValue(c.getCompras());
@@ -195,7 +195,7 @@ public class ReporteExportService {
             Sheet s5 = wb.createSheet("Pedidos anulados");
             writeHeader(s5, header, "N", "Fecha", "Cliente", "Cajero", "Total", "Motivo");
             int r5 = 1;
-            for (AnuladoReporteDTO a : data.getAnulados()) {
+            for (AnuladoReporteDTO a : data.anulados()) {
                 Row row = s5.createRow(r5++);
                 row.createCell(0).setCellValue(a.getNumero());
                 row.createCell(1).setCellValue(a.getFecha());

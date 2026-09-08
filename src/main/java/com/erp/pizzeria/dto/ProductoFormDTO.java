@@ -51,6 +51,7 @@ public class ProductoFormDTO {
         f.tamanio = p.getTamanio() != null ? p.getTamanio().name() : null;
         f.disponible = Boolean.TRUE.equals(p.getDisponible());
         f.idCategoria = p.getCategoria() != null ? p.getCategoria().getIdCategoria() : null;
+
         return f;
     }
 }

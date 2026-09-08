@@ -31,6 +31,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
                                                    AuthenticationSuccessHandler successHandler) throws Exception {
         http
+                .csrf(csrf-> csrf.ignoringRequestMatchers("/api/**")) //las rutas /api/ no exigiran token csrf
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "/css/**", "/js/**", "/img/**", "/favicon.ico", "/error").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMINISTRADOR")

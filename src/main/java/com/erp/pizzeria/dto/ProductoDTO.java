@@ -9,33 +9,29 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class ProductoDTO {
-    private Integer idProducto;
-    private String codigo;
-    private String nombre;
-    private BigDecimal precio;
-    private Integer stock;
-    private Boolean disponible;
-    private Integer idCategoria;
-    private String categoria;
-    private boolean preparado;
 
+public record ProductoDTO (
+    Integer idProducto,
+    String codigo,
+    String nombre,
+    BigDecimal precio,
+    Integer stock,
+    Boolean disponible,
+    Integer idCategoria,
+    String categoria,
+    boolean preparado
+){
     public static ProductoDTO from(Producto p) {
-        return ProductoDTO.builder()
-                .idProducto(p.getIdProducto())
-                .codigo(p.getCodigo())
-                .nombre(p.getNombre())
-                .precio(p.getPrecio())
-                .stock(p.getStock())
-                .disponible(p.getDisponible())
-                .idCategoria(p.getCategoria() != null ? p.getCategoria().getIdCategoria() : null)
-                .categoria(p.getCategoria() != null ? p.getCategoria().getNombre() : null)
-                .preparado(p.getStock() == null)
-                .build();
+        return new ProductoDTO(
+                p.getIdProducto(),
+                p.getCodigo(),
+                p.getNombre(),
+                p.getPrecio(),
+                p.getStock(),
+                p.getDisponible(),
+                p.getCategoria()!=null?p.getCategoria().getIdCategoria():null,
+                p.getCategoria()!=null?p.getCategoria().getNombre():null,
+                p.getStock()==null
+        );
     }
 }

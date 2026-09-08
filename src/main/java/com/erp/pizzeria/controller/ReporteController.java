@@ -61,16 +61,16 @@ public class ReporteController {
     @GetMapping("/reportes")
     public String reportes(Model model) {
         ReporteDataDTO data = buildReportData();
-        long topMax = data.getTopProductos().stream().mapToLong(TopProductoDTO::getCantidad).max().orElse(1);
+        long topMax = data.topProductos().stream().mapToLong(TopProductoDTO::getCantidad).max().orElse(1);
 
         model.addAttribute("active", "reportes");
         model.addAttribute("pageTitle", "Reportes");
-        model.addAttribute("salesStats", data.getSalesStats());
-        model.addAttribute("topProductos", data.getTopProductos());
+        model.addAttribute("salesStats", data.salesStats());
+        model.addAttribute("topProductos", data.topProductos());
         model.addAttribute("topMax", topMax);
-        model.addAttribute("comprasPorProveedor", data.getComprasPorProveedor());
-        model.addAttribute("movimientosPorTipo", data.getMovimientosPorTipo());
-        model.addAttribute("anulados", data.getAnulados());
+        model.addAttribute("comprasPorProveedor", data.comprasPorProveedor());
+        model.addAttribute("movimientosPorTipo", data.movimientosPorTipo());
+        model.addAttribute("anulados", data.anulados());
         return "admin/reportes";
     }
 
